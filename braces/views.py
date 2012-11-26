@@ -408,9 +408,9 @@ class AjaxResponseMixin(object):
 
 
 class PJAXResponseMixin(object):
-    pjax_context_name = 'parent'
-    pjax_base_template = 'base.html'
-    pjax_template = 'pjax.html'
+    pjax_context_name = "parent"
+    pjax_base_template = "base.html"
+    pjax_template = "pjax.html"
 
     def get_context_data(self, **kwargs):
         context = super(PJAXResponseMixin, self).get_context_data(**kwargs)
@@ -422,4 +422,4 @@ class PJAXResponseMixin(object):
         return context
 
     def is_pjax(self):
-        return self.request.META.get('HTTP_X_PJAX', False)
+        return self.request.META.get("HTTP_X_PJAX", False)
