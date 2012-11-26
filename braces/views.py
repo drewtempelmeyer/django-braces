@@ -405,3 +405,21 @@ class AjaxResponseMixin(object):
 
     def delete_ajax(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
+
+
+class PJAXResponseMixin(object):
+    pjax_context_name = 'parent'
+    pjax_base_template = 'base.html'
+    pjax_template = 'pjax.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PJAXResponseMixin, self).get_context_data(**kwargs)
+
+        if self.is_pjax():
+            context[self.pjax_context_name] = self.pjax_template
+        else:
+            context[self.pjax_context_name] = self.pjax_base_template
+        return context
+
+    def is_pjax(self):
+        return self.request.META.get('HTTP_X_PJAX', False)
